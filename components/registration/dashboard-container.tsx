@@ -1561,12 +1561,11 @@ export function DashboardContainer() {
       )}
 
       {/* Hidden Flag Container in DOM */}
-      <div id="dynamic-challenge-flag" className="hidden" data-flag={dynamicFlag} style={{ display: 'none' }}></div>
+      <div id="heyloo" className="hidden" data-howdy={dynamicFlag} style={{ display: 'none' }}></div>
 
       {/* Faint hint at the bottom for inspect challenge */}
       {!hasSolvedChallenge && dynamicFlag && (
         <div className="text-[10px] text-white/5 select-all hover:text-white/20 transition-colors text-center mt-12 mb-6">
-          System Clue: Flag search node is nested with ID `dynamic-challenge-flag`.
         </div>
       )}
     </div>

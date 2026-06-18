@@ -812,7 +812,7 @@ export function DiscoverContainer() {
                                       )}
                                       {!participant.hasSolvedChallenge && (
                                         <span className="px-[8px] py-[2px] bg-red-500/10 border border-red-500/20 rounded-[6px] text-[11px] text-red-400 font-semibold tracking-wide">
-                                          🔴 Unverified (Noob Tag)
+                                          🔴 Unverified Noob
                                         </span>
                                       )}
                                     </div>
