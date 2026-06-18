@@ -891,7 +891,7 @@ export function DashboardContainer() {
             
             <div className="pt-[4px]">
               <a
-                href="https://discord.gg/kqNUEVGmXA"
+                href="https://discord.gg/Und8vHaw5a"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-[#22c55e] hover:bg-[#4ade80] text-white font-medium px-6 py-3 rounded-xl transition-all duration-200 shadow-[0_0_15px_rgba(34,197,94,0.4)] hover:shadow-[0_0_20px_rgba(34,197,94,0.6)]"
@@ -1332,7 +1332,6 @@ export function DashboardContainer() {
 
       {/* Hidden Flag Container in DOM */}
       <div data-howdy={dynamicFlag} />
-
       {/* Faint hint at the bottom for inspect challenge */}
       {!hasSolvedChallenge && dynamicFlag && (
         <div className="text-[10px] text-white/5 select-all hover:text-white/20 transition-colors text-center mt-12 mb-6"></div>
