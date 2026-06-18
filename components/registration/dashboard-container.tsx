@@ -1330,12 +1330,7 @@ export function DashboardContainer() {
       )}
 
       {/* Hidden Flag Container in DOM */}
-      <div
-        id="heyloo"
-        className="hidden"
-        data-howdy={dynamicFlag}
-        style={{ display: "none" }}
-      ></div>
+      <div data-howdy={dynamicFlag} />
 
       {/* Faint hint at the bottom for inspect challenge */}
       {!hasSolvedChallenge && dynamicFlag && (
