@@ -73,9 +73,8 @@ export async function POST(request: NextRequest) {
     }
 
     const expectedFlag = generateFlag(authResult.user.uid);
-    const fullExpectedFlag = `${FLAG_PREFIX}${expectedFlag}`;
 
-    if (flag.trim() !== fullExpectedFlag) {
+    if (flag.trim() !== expectedFlag) {
       return NextResponse.json(
         { success: false, message: "Incorrect flag. Try again!" },
         { status: 400 }

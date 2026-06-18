@@ -974,9 +974,7 @@ export function DashboardContainer() {
                     className="text-[14px] leading-[20px] text-[#22c55e] font-medium"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
-                    💡 <span className="underline">CTF Hint</span>: The
-                    application may reveal more information than it chooses to
-                    display to the user.
+                    💡 <span className="underline">CTF Hint</span>: The browser receives more information than the interface chooses to present. Trace the flow of data.
                   </p>
                   <p
                     className="text-[13px] text-white/60 leading-[18px]"
