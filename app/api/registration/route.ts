@@ -392,7 +392,19 @@ const getOrCreateBatchDocument = async () => {
 
 export async function POST(request: Request) {
   try {
+    const ip = getClientIp(request);
+
     if (request.headers.get("content-type")?.includes("application/json")) {
+      if (!(await checkRateLimit(`${ip}:registration_validation`, 20, 60 * 1000))) {
+        return NextResponse.json(
+          {
+            message: "Too many validation requests. Please try again later.",
+            error: "Rate limit exceeded",
+          },
+          { status: 429 },
+        );
+      }
+
       const body = await request.json();
       if (body?.validation_step) {
         if (isRegistrationClosed()) {
@@ -447,7 +459,6 @@ export async function POST(request: Request) {
     }
 
     // IP rate limiting (5 requests per minute)
-    const ip = getClientIp(request);
     if (!(await checkRateLimit(ip, 5, 60 * 1000))) {
       return NextResponse.json(
         {
