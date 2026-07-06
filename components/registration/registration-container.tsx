@@ -438,8 +438,8 @@ export function RegistrationContainer({
       case "age":
         if (!value || !value.trim()) return "Age is required";
         const ageNum = parseInt(value.trim());
-        if (isNaN(ageNum) || ageNum <= 0 || ageNum >= 120) {
-          return "Please enter a valid age";
+        if (isNaN(ageNum) || ageNum < 13 || ageNum > 100){
+          return "Please enter a valid age (13-100)";
         }
         break;
       case "organisation":
