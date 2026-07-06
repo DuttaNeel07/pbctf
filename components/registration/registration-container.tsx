@@ -1714,7 +1714,7 @@ export function RegistrationContainer({
 
               <div className="flex flex-col gap-3">
                 <div className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-ink-muted">
-                  {"// optional · boost your visibility"}
+                  "// optional · boost your visibility"
                 </div>
                 <FormInput
                   label="Portfolio"
@@ -1809,7 +1809,7 @@ export function RegistrationContainer({
               {/* Optional Attendance Checkboxes */}
               <div className="rounded-md border border-[var(--border-soft)] bg-surface-inset/50 p-4">
                 <div className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-ink-muted mb-4">
-                  {"// Event history (Optional)"}
+                  "// Event history (Optional)"
                 </div>
                 <div className="flex flex-col gap-3">
                   <label className="flex items-start gap-3 cursor-pointer group">
@@ -2022,7 +2022,7 @@ export function RegistrationContainer({
       {/* ===================== FOOTER HINT ===================== */}
       <div className="flex flex-col items-center justify-center gap-2 text-center">
         <div className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-ink-muted">
-          {"// data auto-saved locally · safe to refresh"}
+          "// data auto-saved locally · safe to refresh"
         </div>
         <RecaptchaNotice />
       </div>
