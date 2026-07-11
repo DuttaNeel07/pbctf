@@ -13,6 +13,7 @@ import User, { IUser } from "@/models/User";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { verifyRecaptcha } from "@/lib/recaptcha";
 import { isRegistrationClosed } from "@/lib/constants";
+import { validateTwintroCode } from "@/lib/validate-twintro";
 
 // Utility functions for format validation
 const validateEmail = (email: string) =>
@@ -777,6 +778,29 @@ export async function POST(request: Request) {
       );
     }
 
+     // Twintro challenge code — validated once at the challenge step via
+    // /api/validate-twintro (UX flow), and re-checked here as a server-side
+    // guard against direct API calls that bypass the UI.
+    const twintroCode = data.twintro_code as string;
+    if (!twintroCode || !twintroCode.trim()) {
+      return NextResponse.json(
+        {
+          message: "Twintro challenge code is required.",
+          error: "Solve the Twintro challenge before registering.",
+        },
+        { status: 400 },
+      );
+    }
+    if (!validateTwintroCode(twintroCode)) {
+      return NextResponse.json(
+        {
+          message: "Invalid twintro challenge code.",
+          error: "Invalid twintro code",
+        },
+        { status: 400 },
+      );
+    }
+
     const existingUserByGithub = await User.findOne({
       github_link: { $in: buildProfileLinkCandidates(data.github_link) },
     });
@@ -802,7 +826,6 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
-
     // Check for duplicate email registration
     const existingUserByEmail = await User.findOne({ email: data.email });
     if (existingUserByEmail) {
@@ -854,6 +877,7 @@ export async function POST(request: Request) {
       age: parseInt(data.age),
       organisation: data.organisation,
       isLooking: false, // Default value
+      twintroChallengeSolved: true,
     };
 
     const updates = {
