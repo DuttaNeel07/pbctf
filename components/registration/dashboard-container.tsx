@@ -330,7 +330,8 @@ export function DashboardContainer() {
   useEffect(() => {
     if (!user) return;
     setHasSolvedChallenge(!!(user as any).hasSolvedChallenge);
-    setHasSolvedTwintro(!!(user as any).twintroChallengeSolved);
+    const twintroSolved = !!(user as any).twintroChallengeSolved;
+    setHasSolvedTwintro(twintroSolved);
 
     const profileFields = [
       { key: "name", label: "Name" },
@@ -354,7 +355,11 @@ export function DashboardContainer() {
       if (value && value !== null && value !== "") completed++;
       else missing.push(field.label);
     });
-    setProfileCompleteness(Math.round((completed / profileFields.length) * 100));
+
+    if (!twintroSolved) missing.push("Prerequisite Challenge");
+    const totalItems = profileFields.length + 1;
+    const completedItems = completed + (twintroSolved ? 1 : 0);
+    setProfileCompleteness(Math.round((completedItems / totalItems) * 100));
     setMissingFields(missing);
   }, [user]);
 
@@ -1142,7 +1147,7 @@ export function DashboardContainer() {
           <div className="flex flex-col gap-3 p-4 sm:p-5">
             <div>
               <div className={`font-mono text-[10.5px] uppercase tracking-[0.2em] mb-1 ${hasSolvedTwintro ? "text-brand" : "text-[var(--danger)]"}`}>
-                {hasSolvedTwintro ? "// VERIFIED · RSVP UNLOCKED" : "// ACTION REQUIRED · RSVP LOCKED"}
+                {hasSolvedTwintro ? "// VERIFIED" : "// ACTION REQUIRED"}
               </div>
               <h2 className="text-[20px] sm:text-[24px] font-semibold text-ink tracking-tight font-heading leading-tight">
                 Prerequisite Challenge
@@ -1157,7 +1162,7 @@ export function DashboardContainer() {
                       <span>mandatory.prerequisite</span>
                     </div>
                     <p className="text-[13.5px] leading-relaxed text-ink font-body">
-                      A new challenge has dropped and it&apos;s <span className="font-semibold">mandatory</span>. Solve it to unlock your RSVP eligibility.
+                    You must solve the new challenge to be eligible for the event. This is mandatory, unlike the optional warm-up flag.
                     </p>
                   </div>
 
@@ -1175,7 +1180,7 @@ export function DashboardContainer() {
                     <span>verification.complete</span>
                   </div>
                   <p className="text-[13.5px] leading-relaxed text-ink font-body">
-                    Challenge cracked. You&apos;re all set to RSVP for the event.
+                    Challenge cracked. You&apos;re confirmed eligible for the event.
                   </p>
                 </div>
               )}
