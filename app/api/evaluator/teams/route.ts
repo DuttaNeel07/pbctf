@@ -47,6 +47,8 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10');
     const sort = searchParams.get('sort'); // 'votes'
     const tiers = searchParams.get('tiers')?.split(',').filter(Boolean) || [];
+    const status = searchParams.get('status'); // 'pending' | 'evaluated' (type === 'assigned' only)
+    const reviewed = searchParams.get('reviewed'); // 'false' = only teams no evaluator has reviewed yet
 
     const skip = (page - 1) * limit;
 
@@ -68,6 +70,23 @@ export async function GET(request: NextRequest) {
       }
       pipeline.push({ $match: { teamCode: { $in: assignedTeamCodes } } });
 
+      // Filter by whether THIS evaluator has already evaluated the team, so
+      // pagination totals reflect the tab being viewed rather than every
+      // assigned team.
+      if (status === 'pending') {
+        pipeline.push({
+          $match: {
+            evaluations: { $not: { $elemMatch: { evaluatorId: authResult.user.uid } } },
+          },
+        });
+      } else if (status === 'evaluated') {
+        pipeline.push({
+          $match: {
+            evaluations: { $elemMatch: { evaluatorId: authResult.user.uid } },
+          },
+        });
+      }
+
       // Filter by tiers in assigned view if requested
       if (tiers.length > 0) {
         pipeline.push({ $match: { 'evaluations': { $elemMatch: { evaluatorId: authResult.user.uid, tier: { $in: tiers } } } } });
@@ -78,6 +97,11 @@ export async function GET(request: NextRequest) {
       if (tiers.length > 0) {
         pipeline.push({ $match: { 'evaluations.tier': { $in: tiers } } });
       }
+    }
+
+    // Not-reviewed-by-anyone filter, applies to either view.
+    if (reviewed === 'false') {
+      pipeline.push({ $match: { isEvaluated: { $ne: true } } });
     }
 
     pipeline.push({
