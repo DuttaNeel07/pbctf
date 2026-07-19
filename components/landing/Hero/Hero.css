@@ -171,8 +171,8 @@
 .pbctf-landing .hero__actions-wrapper {
   position: absolute;
   bottom: 30%;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   z-index: 20;
 }
 

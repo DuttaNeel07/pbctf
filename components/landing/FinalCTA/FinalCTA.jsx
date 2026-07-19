@@ -39,12 +39,12 @@ export default function FinalCTA() {
           Ready To Enter The Arena?
         </h2>
         <p className="final-cta__text">
-          Registrations are now open. Form your team, sharpen your skills, and
-          compete against some of the brightest minds in cybersecurity.
+          Registrations are now closed. If you have already registered, log in
+          to your dashboard to track your team&apos;s status.
         </p>
         <div className="final-cta__actions">
           <a
-            href={isAuthenticated ? '/dashboard' : '/register'}
+            href={isAuthenticated ? '/dashboard' : '/login'}
             className={`btn ${isAuthenticated ? 'btn--secondary' : 'btn--primary'}`}
             id="cta-register-now"
             onMouseEnter={playHover}
@@ -59,7 +59,7 @@ export default function FinalCTA() {
                 </svg>
               </>
             ) : (
-              'Register Now'
+              'Login'
             )}
           </a>
 
