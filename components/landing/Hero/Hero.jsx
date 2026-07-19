@@ -144,26 +144,15 @@ export default function Hero() {
               </svg>
             </a>
           ) : (
-            <>
-              <a
-                href="/register"
-                className="btn btn--primary"
-                id="hero-register-cta"
-                onMouseEnter={playHover}
-                onClick={playClick}
-              >
-                Register Now
-              </a>
-              <a
-                href="/login"
-                className="btn btn--secondary"
-                id="hero-login-cta"
-                onMouseEnter={playHover}
-                onClick={playClick}
-              >
-                Login
-              </a>
-            </>
+            <a
+              href="/register"
+              className="btn btn--secondary"
+              id="hero-register-cta"
+              onMouseEnter={playHover}
+              onClick={playClick}
+            >
+              Registrations Closed
+            </a>
           )}
         </motion.div>
       </div>

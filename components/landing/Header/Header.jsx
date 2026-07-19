@@ -166,13 +166,13 @@ export default function Header() {
             </div>
           ) : (
             <a
-              href="/register"
+              href="/login"
               className="btn btn--primary header__cta"
               id="header-cta"
               onMouseEnter={playHover}
               onClick={playClick}
             >
-              Register Now
+              Login
             </a>
           )}
 
@@ -219,14 +219,14 @@ export default function Header() {
                 </motion.a>
               ))}
               <motion.a
-                href={isAuthenticated ? '/dashboard' : '/register'}
+                href={isAuthenticated ? '/dashboard' : '/login'}
                 className="btn btn--primary header__overlay-cta"
                 onClick={() => { playClick(); closeMenu(); }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + NAV_LINKS.length * 0.05, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               >
-                {isAuthenticated ? 'Access Granted' : 'Register Now'}
+                {isAuthenticated ? 'Access Granted' : 'Login'}
               </motion.a>
               {isAuthenticated && (
                 <motion.button
