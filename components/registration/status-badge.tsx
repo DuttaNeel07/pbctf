@@ -23,6 +23,7 @@ const variantMap: Record<string, Variant> = {
   declined:      { cls: "bg-[var(--danger-soft)] border-[var(--danger)]/35 text-[var(--danger)]", dot: "bg-[var(--danger)]" },
   rejected:      { cls: "bg-[var(--danger-soft)] border-[var(--danger)]/35 text-[var(--danger)]", dot: "bg-[var(--danger)]" },
   rsvp_declined: { cls: "bg-[var(--danger-soft)] border-[var(--danger)]/35 text-[var(--danger)]", dot: "bg-[var(--danger)]" },
+  "not-selected":{ cls: "bg-[var(--danger-soft)] border-[var(--danger)]/35 text-[var(--danger)]", dot: "bg-[var(--danger)]" },
   withdrawn:     { cls: "bg-white/[0.03] border-[var(--border-soft)] text-ink-muted",            dot: "bg-ink-muted" },
 };
 

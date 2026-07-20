@@ -11,6 +11,7 @@ import {
   X,
 } from "lucide-react";
 import { HudFrame } from "./hud-frame";
+import { isShortlistAnnounced } from "@/lib/constants";
 
 interface TimeRemaining {
   days: number;
@@ -225,8 +226,10 @@ export function DeadlineTimer({
     teamStatus === "shortlisted" ||
     teamStatus === "rsvped";
   const hasRejectedEvaluation = evaluations.some((e) => e.tier === "rejected");
+  const notSelected = isExpired && hasTeam && !isShortlisted && isShortlistAnnounced();
 
   const getHeaderIcon = () => {
+    if (notSelected) return <XCircle className="w-4 h-4 text-ink-muted" />;
     if (isExpired && hasTeam && isEvaluated) {
       if (hasRejectedEvaluation) return <XCircle className="w-4 h-4 text-ink-muted" />;
       if (isShortlisted) return <Trophy className="w-4 h-4 text-brand" />;
@@ -238,6 +241,7 @@ export function DeadlineTimer({
   };
 
   const getHeaderText = () => {
+    if (notSelected) return "Team Not Selected";
     if (isExpired && hasTeam && isEvaluated) {
       if (hasRejectedEvaluation) return "Team Not Selected";
       if (isShortlisted) return "Your Team Has Been Selected";
@@ -268,14 +272,41 @@ export function DeadlineTimer({
         {isExpired ? (
           <div className="flex flex-col items-center gap-3 w-full">
             {hasTeam ? (
-              isEvaluated ? (
+              notSelected ? (
+                <>
+                  <p className="text-[14px] text-ink-secondary font-body text-center max-w-[42ch]">
+                    Unfortunately, your team wasn&apos;t shortlisted for PBCTF 5.0.
+                  </p>
+                  <p className="text-[12.5px] text-ink-muted font-body text-center max-w-[42ch]">
+                    Thank you for participating. We&apos;d love to have you at our{" "}
+                    <a
+                      href="https://pointblank.club/events"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-brand underline underline-offset-2 hover:brightness-110"
+                    >
+                      future events
+                    </a>
+                    .
+                  </p>
+                </>
+              ) : isEvaluated ? (
                 hasRejectedEvaluation ? (
                   <>
                     <p className="text-[14px] text-ink-secondary font-body text-center max-w-[42ch]">
                       Unfortunately, your team was not selected for the next round.
                     </p>
                     <p className="text-[12.5px] text-ink-muted font-body text-center max-w-[42ch]">
-                      Thank you for participating. we appreciate your effort and dedication.
+                      Thank you for participating. We&apos;d love to have you at our{" "}
+                      <a
+                        href="https://pointblank.club/events"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-brand underline underline-offset-2 hover:brightness-110"
+                      >
+                        future events
+                      </a>
+                      .
                     </p>
                   </>
                 ) : isShortlisted ? (

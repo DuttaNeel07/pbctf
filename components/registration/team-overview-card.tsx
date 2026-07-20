@@ -22,7 +22,8 @@ interface TeamOverviewCardProps {
     | "under-review"
     | "shortlisted"
     | "confirmed"
-    | "declined";
+    | "declined"
+    | "not-selected";
 }
 
 export function TeamOverviewCard({ team, isLead, status }: TeamOverviewCardProps) {
