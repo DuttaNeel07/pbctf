@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
 import { API_ENDPOINTS } from "@/lib/api-config";
@@ -41,7 +41,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Spinner } from "@/components/ui/spinner";
 import { useToast } from "@/hooks/use-toast";
-import { TEAM_SIZE } from "@/lib/constants";
+import { TEAM_SIZE, isShortlistAnnounced } from "@/lib/constants";
 import { HudFrame } from "./hud-frame";
 
 interface Team {
@@ -103,7 +103,7 @@ function StatusStrip({
   onConfirmRSVP,
   onDeclineRSVP,
 }: {
-  status: "none" | "active" | "submitted" | "under-review" | "shortlisted" | "confirmed" | "declined";
+  status: "none" | "active" | "submitted" | "under-review" | "shortlisted" | "confirmed" | "declined" | "not-selected";
   teamName?: string;
   pendingCount: number;
   onPrimary?: () => void;
@@ -119,7 +119,7 @@ function StatusStrip({
 }) {
   const meta: Record<
     string,
-    { label: string; tone: "danger" | "warning" | "info" | "brand"; sub: string }
+    { label: string; tone: "danger" | "warning" | "info" | "brand"; sub: ReactNode }
   > = {
     none: {
       label: "NO TEAM",
@@ -155,6 +155,24 @@ function StatusStrip({
       label: "RSVP DECLINED",
       tone: "danger",
       sub: `${teamName ?? "Team"} declined the slot.`,
+    },
+    "not-selected": {
+      label: "NOT SELECTED",
+      tone: "danger",
+      sub: (
+        <>
+          {teamName ?? "Your team"} wasn&apos;t shortlisted this time. Join us for our{" "}
+          <a
+            href="https://pointblank.club/events"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand underline underline-offset-2 hover:brightness-110"
+          >
+            future events
+          </a>
+          .
+        </>
+      ),
     },
   };
 
@@ -526,7 +544,8 @@ export function DashboardContainer() {
     | "under-review"
     | "shortlisted"
     | "confirmed"
-    | "declined" => {
+    | "declined"
+    | "not-selected" => {
     if (!team || !team.teamStatus) return "none";
     if (team.isShortlisted && team.teamStatus === "submitted") return "shortlisted";
     const statusMap: Record<string, any> = {
@@ -537,7 +556,15 @@ export function DashboardContainer() {
       rsvped: "confirmed",
       rsvp_declined: "declined",
     };
-    return statusMap[team.teamStatus] || "active";
+    const derived = statusMap[team.teamStatus] || "active";
+    if (
+      isShortlistAnnounced() &&
+      !team.isShortlisted &&
+      (derived === "active" || derived === "submitted")
+    ) {
+      return "not-selected";
+    }
+    return derived;
   };
 
   const isTeamLead = (): boolean => {
