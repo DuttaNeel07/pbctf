@@ -1,0 +1,23 @@
+/* ===================================================================
+   Leaderboard — landing "Final Standings" section (top three + CTA)
+   =================================================================== */
+
+.pbctf-landing .lb-section__header {
+  margin-bottom: var(--space-12);
+}
+
+.pbctf-landing .lb-section__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-12);
+}
+
+.pbctf-landing .lb-section__note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  color: var(--muted-dark);
+  text-align: center;
+}

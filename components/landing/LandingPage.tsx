@@ -12,6 +12,7 @@ import MissionBrief from "./MissionBrief/MissionBrief";
 import Timeline from "./Timeline/Timeline";
 import Categories from "./Categories/Categories";
 import Prizes from "./Prizes/Prizes";
+import Leaderboard from "./Leaderboard/Leaderboard";
 import AboutPointBlank from "./AboutPointBlank/AboutPointBlank";
 import Venue from "./Venue/Venue";
 import FAQ from "./FAQ/FAQ";
@@ -92,6 +93,7 @@ export default function LandingPage() {
           <Timeline />
           <Categories />
           <Prizes />
+          <Leaderboard />
           <Sponsors />
           <AboutPointBlank />
           <Venue />

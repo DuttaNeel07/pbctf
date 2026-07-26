@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { id: 'nav-timeline', label: 'Timeline', href: '#timeline' },
   { id: 'nav-categories', label: 'Categories', href: '#categories' },
   { id: 'nav-prizes', label: 'Prizes', href: '#prizes' },
+  { id: 'nav-leaderboard', label: 'Scoreboard', href: '#leaderboard' },
   { id: 'nav-faq', label: 'FAQ', href: '#faq' },
 ];
 
