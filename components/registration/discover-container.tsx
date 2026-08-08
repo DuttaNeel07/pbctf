@@ -681,7 +681,7 @@ export function DiscoverContainer() {
         return;
       }
 
-      const response = await fetch(`/api/users/${userId}`, {
+      const response = await fetch(`/pbctf/api/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
