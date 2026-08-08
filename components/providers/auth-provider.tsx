@@ -21,9 +21,9 @@ import posthog from "posthog-js";
 import { clearAuthData } from "@/lib/auth-storage";
 
 const API_ENDPOINTS = {
-    login: '/api/user/login',
-    register: '/api/user/register',
-    userProfile: '/api/user/profile',
+    login: '/pbctf/api/user/login',
+    register: '/pbctf/api/user/register',
+    userProfile: '/pbctf/api/user/profile',
 };
 
 // App-owned localStorage keys that must be wiped on logout. Firebase's own
