@@ -7,41 +7,41 @@
 
 export const API_ENDPOINTS = {
   // ===== AUTHENTICATION =====
-  register: '/api/registration',              // POST (FormData)
-  login: '/api/user/login',                   // POST (JSON)
+  register: '/pbctf/api/registration',              // POST (FormData)
+  login: '/pbctf/api/user/login',                   // POST (JSON)
 
   // ===== USER ENDPOINTS =====
-  userProfile: '/api/user/profile',                    // GET, PUT
-  lookingForTeam: '/api/user/looking-for-team',        // GET, PUT
-  userRsvp: '/api/user/rsvp',                          // PUT
-  users: '/api/users',                                 // GET (by ID)
-  userFlag: '/api/user/flag',                          // GET, POST
+  userProfile: '/pbctf/api/user/profile',                    // GET, PUT
+  lookingForTeam: '/pbctf/api/user/looking-for-team',        // GET, PUT
+  userRsvp: '/pbctf/api/user/rsvp',                          // PUT
+  users: '/pbctf/api/users',                                 // GET (by ID)
+  userFlag: '/pbctf/api/user/flag',                          // GET, POST
 
   // ===== TEAM ENDPOINTS =====
-  createTeam: '/api/team/create',                      // POST
-  lookingForMembers: '/api/team/looking-for-members',  // GET, PUT
-  joinTeam: '/api/team/join',                          // PUT
-  joinRequest: '/api/team/join-request',               // POST, GET
-  respondToJoinRequest: (requestId: string) => `/api/team/join-request/${requestId}`,  // PUT
-  cancelInvite: (requestId: string) => `/api/team/join-request/${requestId}`,           // DELETE
-  leaveTeam: '/api/team/leave',                        // PUT
-  removeMember: '/api/team/remove-member',             // PUT
-  deleteTeam: '/api/team/delete',                      // DELETE
-  getTeam: (teamCode: string) => `/api/team/${teamCode}`,  // GET
+  createTeam: '/pbctf/api/team/create',                      // POST
+  lookingForMembers: '/pbctf/api/team/looking-for-members',  // GET, PUT
+  joinTeam: '/pbctf/api/team/join',                          // PUT
+  joinRequest: '/pbctf/api/team/join-request',               // POST, GET
+  respondToJoinRequest: (requestId: string) => `/pbctf/api/team/join-request/${requestId}`,  // PUT
+  cancelInvite: (requestId: string) => `/pbctf/api/team/join-request/${requestId}`,           // DELETE
+  leaveTeam: '/pbctf/api/team/leave',                        // PUT
+  removeMember: '/pbctf/api/team/remove-member',             // PUT
+  deleteTeam: '/pbctf/api/team/delete',                      // DELETE
+  getTeam: (teamCode: string) => `/pbctf/api/team/${teamCode}`,  // GET
 
   // ===== ADMIN ENDPOINTS =====
-  adminParticipants: '/api/admin/participants',        // GET
-  adminTeams: '/api/admin/teams',                      // GET
-  adminTeamDetails: (teamCode: string) => `/api/admin/teams/${teamCode}`,    // GET
-  adminUpdateTeam: (teamCode: string) => `/api/admin/teams/${teamCode}`,     // PUT
-  adminEvaluators: '/api/admin/evaluators',            // GET
-  adminAssignEvaluators: '/api/admin/evaluators/assign',  // PUT
-  adminExport: '/api/admin/export',                    // GET
-  adminPromoteUser: '/api/admin/users/promote',        // PUT
+  adminParticipants: '/pbctf/api/admin/participants',        // GET
+  adminTeams: '/pbctf/api/admin/teams',                      // GET
+  adminTeamDetails: (teamCode: string) => `/pbctf/api/admin/teams/${teamCode}`,    // GET
+  adminUpdateTeam: (teamCode: string) => `/pbctf/api/admin/teams/${teamCode}`,     // PUT
+  adminEvaluators: '/pbctf/api/admin/evaluators',            // GET
+  adminAssignEvaluators: '/pbctf/api/admin/evaluators/assign',  // PUT
+  adminExport: '/pbctf/api/admin/export',                    // GET
+  adminPromoteUser: '/pbctf/api/admin/users/promote',        // PUT
 
   // ===== EVALUATOR ENDPOINTS =====
-  evaluatorRegister: '/api/evaluator/register',        // POST
-  evaluatorTeams: '/api/evaluator/teams',              // GET
-  evaluatorEvaluate: '/api/evaluator/evaluate',        // POST
-  evaluatorVote: '/api/evaluator/vote',                // PUT
+  evaluatorRegister: '/pbctf/api/evaluator/register',        // POST
+  evaluatorTeams: '/pbctf/api/evaluator/teams',              // GET
+  evaluatorEvaluate: '/pbctf/api/evaluator/evaluate',        // POST
+  evaluatorVote: '/pbctf/api/evaluator/vote',                // PUT
 };
